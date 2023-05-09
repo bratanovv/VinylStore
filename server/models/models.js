@@ -80,7 +80,7 @@ VinylRecord.hasMany(BasketItem)
 BasketItem.belongsTo(VinylRecord)
 
 
-VinylRecord.hasMany(RecordInfo)
+VinylRecord.hasMany(RecordInfo, {as: 'info'})
 RecordInfo.hasMany(VinylRecord)
 
 Type.belongsToMany(Brand, {through: TypeBrand})
