@@ -7,12 +7,12 @@ const path = require('path')
 class VinylRecordController {
     async create(req, res, next) {
         try {
-            let {name, price, brandId, typeId, info} = req.body
+            let {name, price, brandId, typeId, published ,info} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + ".jpeg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
 
-            const item = await VinylRecord.create({name, price, brandId, typeId, img: fileName})
+            const item = await VinylRecord.create({name, price, brandId, typeId,published, img: fileName})
 
             if (info) {
                 info = JSON.parse(info)
