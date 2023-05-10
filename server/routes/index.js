@@ -10,6 +10,6 @@ const userRouter = require('./userRouter')
 router.use('/user',userRouter)
 router.use('/type',typeRouter)
 router.use('/brand',brandRouter)
-router.use('/vinylrecord',vinylRecordRouter)
+router.use('/record',vinylRecordRouter)
 
 module.exports = router
