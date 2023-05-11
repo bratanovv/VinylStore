@@ -3,9 +3,17 @@ import {Context} from "../index";
 import {Button, Container, Form, FormControl, Nav, Navbar} from "react-bootstrap";
 import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../utils/consts";
 import {observer} from "mobx-react-lite";
+import {useNavigate} from "react-router";
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
+    const logout=() =>{
+        user.setIsAuth(false)
+        user.setUser({})
+        user.setIsAuth(false)
+        console.log(user)
+    }
+    const history = useNavigate()
     return (
         <Navbar bg="light" variant="light">
             <Container>
@@ -26,15 +34,20 @@ const NavBar = observer(() => {
                 {user.isAuth ?
                     <Nav className="ml-auto">
                         <Nav.Link className="mr-5" href={ADMIN_ROUTE}>ПАНЕЛЬ АДМИНИСТРАТОРА</Nav.Link>
-                        <Nav.Link href={BASKET_ROUTE}>КОРЗИНА</Nav.Link>
+                        <Nav.Link  className="mr-5" href={BASKET_ROUTE}>КОРЗИНА</Nav.Link>
+                         <Button variant={"outline-danger"}  className="me-4"  onClick={()=>logout()}>ВЫЙТИ</Button>
+
+
                     </Nav>
                     :
 
-                    <form className="form-inline my-2 my-lg-0" action={LOGIN_ROUTE}>
-                        <button className="btn btn-outline-success my-2 my-sm-0" onClick={() => user.setIsAuth(true)}
-                                type="submit">ВОЙТИ
-                        </button>
-                    </form>
+                    <Button variant={"outline-success"}  className="me-4"  onClick={()=>history(LOGIN_ROUTE)}>ВОЙТИ</Button>
+                    //
+                    // <form className="form-inline my-2 my-lg-0" action={LOGIN_ROUTE}>
+                    //     <button className="btn btn-outline-success my-2 my-sm-0"
+                    //             type="submit">ВОЙТИ
+                    //     </button>
+                    // </form>
                 }
 
 

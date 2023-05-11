@@ -7,7 +7,7 @@ import {ListGroup} from "react-bootstrap";
 const TypeBar = observer(() => {
     const {record} = useContext(Context)
     return (
-        <ListGroup horizontal>
+        <ListGroup style={{marginLeft:"30px"}} horizontal>
             { record.types.map(type =>
                 <ListGroup.Item
                     style={{cursor:"pointer"}}

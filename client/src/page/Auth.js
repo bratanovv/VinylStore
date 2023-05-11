@@ -1,12 +1,38 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Card, Container, Form, ListGroup, Row} from "react-bootstrap";
 import {NavLink, useLocation} from "react-router-dom";
-import {LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
+import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../utils/consts";
+import {login, registration} from "../http/UserApi";
+import {observer} from "mobx-react-lite";
+import {Context} from "../index";
+import {useNavigate} from "react-router";
 
-const Auth = () => {
+
+const Auth = observer(() => {
     const location = useLocation()
     const isLogin = location.pathname === LOGIN_ROUTE
-    console.log(location)
+    const history = useNavigate()
+    const {user} = useContext(Context)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const click = async () => {
+        try {
+            let data;
+            if (isLogin) {
+                data = await login(email, password)
+            } else {
+                data = await registration(email, password)
+
+            }
+            user.setUser(user)
+            user.setIsAuth(true)
+            history(SHOP_ROUTE)
+        }catch (e) {
+            alert(e.response.data.message)
+        }
+
+    }
 
 
     return (
@@ -18,7 +44,9 @@ const Auth = () => {
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email адрес</Form.Label>
-                        <Form.Control type="email" placeholder="Email"/>
+                        <Form.Control value={email} onChange={e => setEmail(e.target.value)} type="email"
+                                      placeholder="Email"/>
+
                         <Form.Text className="text-muted">
                             Никому не называйте свои личные данные для входа.
                         </Form.Text>
@@ -26,24 +54,25 @@ const Auth = () => {
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Пароль</Form.Label>
-                        <Form.Control type="password" placeholder="Пароль"/>
+                        <Form.Control value={password} onChange={e => setPassword(e.target.value)} type="password"
+                                      placeholder="Пароль"/>
                     </Form.Group>
 
 
-                    <Button variant="outline-success" className="btn btn-outline-success w-100" type="submit">
-                        {isLogin?   'Войти' : 'Регистрация'}
+                    <Button onClick={click} variant="outline-success" className="btn  w-100">
+                        {isLogin ? 'Войти' : 'Регистрация'}
                     </Button>
                     <Row>
-                    {isLogin?
-                    <div>или <NavLink to={REGISTRATION_ROUTE}> Зарегистрироваться</NavLink></div> :
-                        <div>Есть аккаунт? <NavLink to={LOGIN_ROUTE}> Войти</NavLink></div>
-                    }
+                        {isLogin ?
+                            <div>или <NavLink to={REGISTRATION_ROUTE}> Зарегистрироваться</NavLink></div> :
+                            <div>Есть аккаунт? <NavLink to={LOGIN_ROUTE}> Войти</NavLink></div>
+                        }
                     </Row>
 
                 </Form>
             </Card>
         </Container>
     );
-};
+});
 
 export default Auth;

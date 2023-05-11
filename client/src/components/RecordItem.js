@@ -10,7 +10,7 @@ const RecordItem = ({record}) => {
     return (
         <Col md={3} className={"mt-3"} onClick={() => history(RECORDS_ROUTE+'/'+record.id)}>
             <Card className=" border-white" style={{cursor:'pointer'}}>
-                <Image src={record.img}/>
+                <Image src={process.env.REACT_APP_API_URL + record.img}/>
                 <div className="d-flex justify-content-center mb-1 mt-3">
                     <h5 >{record.name}</h5>
 
