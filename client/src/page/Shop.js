@@ -7,6 +7,7 @@ import RecordList from "../components/RecordList";
 const Shop = () => {
     return (
         <Container>
+
             <Row className="mt-3">
                 <Col md={12}>
                    <TypeBar></TypeBar>
