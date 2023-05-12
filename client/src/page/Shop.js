@@ -1,16 +1,17 @@
-import React, {useContext, useEffect} from 'react';
-import {Col, Container, Row} from "react-bootstrap";
+import React, {useContext, useEffect, useState} from 'react';
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import TypeBar from "../components/TypeBar";
 import BrandBar from "../components/BrandBar";
 import RecordList from "../components/RecordList";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {check} from "../http/UserApi";
-import {fetchBrands, fetchRecords, fetchTypes} from "../http/RecordApi";
+import {deleteRecord, fetchBrands, fetchOneRecordByName, fetchRecords, fetchTypes} from "../http/RecordApi";
 import Pages from "../components/Pages";
 
 const Shop = observer(() => {
     const {record} = useContext(Context)
+    const [value, setValue] = useState('')
 
     useEffect(()=>{
       fetchTypes().then(data=> record.setTypes(data))
@@ -32,6 +33,11 @@ const Shop = observer(() => {
 
     },[record.page, record.selectedType,record.selectedBrand])
 
+    const click = () => {
+        if(value.length>0)
+        fetchOneRecordByName(value).then(data=>{record.setRecords(data.rows)})
+
+    }
 
 
 
@@ -46,8 +52,21 @@ const Shop = observer(() => {
 
             </Row >
             <Container className="mt-3">
-                <Col md={5}>
-                <BrandBar></BrandBar>
+                <Col md={8}>
+                    <Row> <Col> <BrandBar></BrandBar></Col> <Col>
+                        <Form  className="d-flex">
+                        <Form.Control
+                            alue={value} onChange={e=>setValue(e.target.value)}
+                            type="search"
+                            placeholder="Пластинка"
+                            className=""
+                            aria-label="Search"
+                        />
+                        <Button variant="outline-dark"  onClick={click}>Искать</Button>
+                    </Form></Col> </Row>
+
+
+
                 </Col>
                 <RecordList></RecordList>
                 <Pages></Pages>

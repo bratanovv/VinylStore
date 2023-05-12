@@ -20,15 +20,7 @@ const NavBar = observer(() => {
             <Container>
                 <Navbar.Brand href={SHOP_ROUTE}>VinylStore</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Form className="d-flex">
-                        <Form.Control
-                            type="search"
-                            placeholder="Пластинка"
-                            className="me-2"
-                            aria-label="Search"
-                        />
-                        <Button variant="outline-dark">Искать</Button>
-                    </Form>
+
 
                 </Nav>
 

@@ -89,8 +89,6 @@ class VinylRecordController {
     }
  async   gett(req,res){
       let str=''.concat(VinylRecordController.arr)
-        console.log(VinylRecordController.arr.at(1))
-        console.log('afafa')
         return res.json(str)
     }
 

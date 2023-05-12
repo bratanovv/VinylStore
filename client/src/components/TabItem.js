@@ -10,8 +10,6 @@ const TabItem = ({record}) => {
     const click = (record) => {
         const name = record.name
         deleteRecord(record.id).then(r => alert(record.name + "was deleted"))
-        history(ADMIN_ROUTE)
-
     }
 
 
@@ -24,8 +22,11 @@ const TabItem = ({record}) => {
             <td>{record.published}</td>
             <td>{record.price}</td>
             <td><Button variant="outline-danger" onClick={() => {
-                click(record);
+
+                 click(record);
                 history(SHOP_ROUTE)
+
+
             }}>УДАЛИТЬ</Button></td>
 
         </tr>

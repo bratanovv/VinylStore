@@ -9,7 +9,6 @@ import {wait} from "@testing-library/user-event/dist/utils";
 
 const Basket = () => {
     const {record} = useContext(Context)
-    const {user} = useContext(Context)
 
 
     useEffect(()=>{
@@ -19,17 +18,13 @@ const Basket = () => {
             record.setRecords(data.rows)
             record.setTotalCount(data.count)
         })
-
-
-
-
     },[])
 
 
 
-            // getFrB().then(data => {
-            //     const   {arr} = JSON.stringify(data).split(',').map(str => parseInt(str));
-            //     console.log(arr)})
+            getFrB().then(data => {
+                const   {arr} = JSON.stringify(data).split(',').map(str => parseInt(str));
+                console.log(arr)})
 
 
 

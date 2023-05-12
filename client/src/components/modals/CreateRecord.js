@@ -4,6 +4,7 @@ import {Context} from "../../index";
 import * as PropTypes from "prop-types";
 import {createRecord, fetchBrands, fetchRecords, fetchTypes} from "../../http/RecordApi";
 import {observer} from "mobx-react-lite";
+import {redirect} from "react-router";
 
 
 const CreateRecord = observer(({show, onHide}) => {
@@ -44,7 +45,8 @@ const CreateRecord = observer(({show, onHide}) => {
         formData.append('brandId',record.selectedBrand.id)
         formData.append('typeId',record.selectedType.id)
         formData.append('info',JSON.stringify(info))
-        createRecord(formData).then(data => onHide())
+        createRecord(formData).then(data =>onHide())
+
     }
     const removeInfo = (number) => {
         setInfo(info.filter(i => i.number !== number))

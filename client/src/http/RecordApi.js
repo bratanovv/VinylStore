@@ -51,6 +51,7 @@ export const fetchOneRecord = async (id) => {
 }
 
 
+
 export const deleteRecord = async (id) => {
     const {data} = await $host.get('api/record/delete/'+id)
 
