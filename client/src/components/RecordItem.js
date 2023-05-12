@@ -21,7 +21,7 @@ const RecordItem = ({record}) => {
                 <div className="d-flex justify-content-center">
 
 
-                    <h6 >{record.price}$</h6>
+                    <h6 >{record.price}руб.</h6>
                 </div>
             </Card>
         </Col>
