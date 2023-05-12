@@ -6,7 +6,7 @@ import RecordList from "../components/RecordList";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {check} from "../http/UserApi";
-import {deleteRecord, fetchBrands, fetchOneRecordByName, fetchRecords, fetchTypes} from "../http/RecordApi";
+import {deleteRecord, fetchBrands, fetchOneRecordByName, fetchRecords, fetchTypes, getFrB} from "../http/RecordApi";
 import Pages from "../components/Pages";
 
 const Shop = observer(() => {
@@ -38,6 +38,11 @@ const Shop = observer(() => {
         fetchOneRecordByName(value).then(data=>{record.setRecords(data.rows)})
 
     }
+
+
+
+
+
 
 
 

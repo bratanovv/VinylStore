@@ -7,7 +7,7 @@ const path = require('path')
 
 
 class VinylRecordController {
-   static arr = [1]
+   static arr = [1,3,4,6,9,10,26]
     async create(req, res, next) {
         try {
             let {name, price, brandId, typeId, published ,info} = req.body
@@ -87,9 +87,9 @@ class VinylRecordController {
 
         return res.json(VinylRecordController.arr)
     }
- async   gett(req,res){
+    gett(req,res){
       let str=''.concat(VinylRecordController.arr)
-        return res.json(str)
+     return res.json(str)
     }
 
     async getByName(req, res) {

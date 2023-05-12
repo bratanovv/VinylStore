@@ -22,9 +22,6 @@ const Basket = () => {
 
 
 
-            getFrB().then(data => {
-                const   {arr} = JSON.stringify(data).split(',').map(str => parseInt(str));
-                console.log(arr)})
 
 
 

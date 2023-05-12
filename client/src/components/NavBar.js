@@ -4,6 +4,7 @@ import {Button, Container, Form, FormControl, Nav, Navbar} from "react-bootstrap
 import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../utils/consts";
 import {observer} from "mobx-react-lite";
 import {useNavigate} from "react-router";
+import {getFrB} from "../http/RecordApi";
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
@@ -13,6 +14,9 @@ const NavBar = observer(() => {
         user.setIsAuth(false)
         console.log(user)
     }
+
+
+
 
     const history = useNavigate()
     return (
