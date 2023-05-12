@@ -27,8 +27,21 @@ export const createRecord = async (record) => {
     return data
 }
 
-export const fetchRecords = async () => {
-    const {data} = await $host.get('api/record')
+export const adToB = async (id) => {
+    const {data} = await $authHost.get('api/record/b/'+id)
+    return data
+}
+export const getFrB = async () => {
+    const {data} = await $authHost.get('api/record/b/b/b')
+    return data
+}
+
+
+
+export const fetchRecords = async (typeId,brandId,page,limit=5) => {
+    const {data} = await $host.get('api/record',{params:{
+            typeId,brandId,page,limit
+        }})
     return data
 }
 export const fetchOneRecord = async (id) => {
@@ -36,3 +49,18 @@ export const fetchOneRecord = async (id) => {
 
     return data
 }
+
+
+export const deleteRecord = async (id) => {
+    const {data} = await $host.get('api/record/delete/'+id)
+
+    return data
+}
+
+export const fetchOneRecordByName = async (name) => {
+    const {data} = await $host.get('api/record/find/'+name)
+
+    return data
+}
+
+

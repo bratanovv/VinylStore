@@ -1,3 +1,5 @@
+
+
 const {VinylRecord, RecordInfo} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
@@ -5,6 +7,7 @@ const path = require('path')
 
 
 class VinylRecordController {
+   static arr = [1]
     async create(req, res, next) {
         try {
             let {name, price, brandId, typeId, published ,info} = req.body
@@ -16,10 +19,11 @@ class VinylRecordController {
 
             if (info) {
                 info = JSON.parse(info)
-                info.forEach(i => RecordInfo.create({
+                info.forEach(i =>
+                    RecordInfo.create({
                     title: i.title,
                     description: i.description,
-                    deviceId: item.id
+                    vinylRecordId: item.id
                 }))
             }
 
@@ -58,8 +62,49 @@ class VinylRecordController {
                 include: [{model: RecordInfo, as: 'info'}]
             }
         )
+
         return res.json(item)
     }
+    async deleteById(req, res) {
+        const {id} = req.params
+        const item = await VinylRecord.findOne(
+            {
+                where: {id},
+                include: [{model: RecordInfo, as: 'info'}]
+            })
+           await item.destroy()
+
+
+        return res.json(item)
+    }
+    async addddd(req, res) {
+
+        const {id} = req.params
+
+
+         VinylRecordController.arr.push(Number(id))
+
+
+        return res.json(VinylRecordController.arr)
+    }
+ async   gett(req,res){
+      let str=''.concat(VinylRecordController.arr)
+        console.log(VinylRecordController.arr.at(1))
+        console.log('afafa')
+        return res.json(str)
+    }
+
+    async getByName(req, res) {
+        const {name} = req.params
+        const item = await VinylRecord.findAndCountAll(
+            {
+                where: {name},
+                include: [{model: RecordInfo, as: 'info'}]
+            }
+        )
+        return res.json(item)
+    }
+
 
 }
 

@@ -7,6 +7,7 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {check} from "../http/UserApi";
 import {fetchBrands, fetchRecords, fetchTypes} from "../http/RecordApi";
+import Pages from "../components/Pages";
 
 const Shop = observer(() => {
     const {record} = useContext(Context)
@@ -14,13 +15,30 @@ const Shop = observer(() => {
     useEffect(()=>{
       fetchTypes().then(data=> record.setTypes(data))
         fetchBrands().then(data=> record.setBrands(data))
-        fetchRecords().then(data=> record.setRecords(data.rows))
+        fetchRecords(null,null,1,4).then(data=>{
+            record.setRecords(data.rows)
+            record.setTotalCount(data.count)
+        })
+
 
     },[])
+
+    useEffect(()=>{
+        fetchRecords(record.selectedType.id,record.selectedBrand.id,record.page,4).then(data=>{
+            record.setRecords(data.rows)
+            record.setTotalCount(data.count)
+        })
+
+
+    },[record.page, record.selectedType,record.selectedBrand])
+
+
+
 
 
     return (
         <Container>
+
             <Row className="mt-3">
                 <Col md={12}>
                    <TypeBar></TypeBar>
@@ -32,6 +50,7 @@ const Shop = observer(() => {
                 <BrandBar></BrandBar>
                 </Col>
                 <RecordList></RecordList>
+                <Pages></Pages>
 
             </Container>
 

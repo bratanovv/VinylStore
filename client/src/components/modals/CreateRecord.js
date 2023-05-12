@@ -67,7 +67,7 @@ const CreateRecord = observer(({show, onHide}) => {
                     <Row className="mb-4">
                         <Col>
                             <Dropdown className="d-flex flex-column">
-                                <Dropdown.Toggle>{record.selectedType.name || 'Выберите тип'}</Dropdown.Toggle>
+                                <Dropdown.Toggle>{record.selectedType.name || 'Выберите жанр'}</Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     {record.types.map(type =>
                                         <Dropdown.Item

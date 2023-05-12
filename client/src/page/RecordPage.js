@@ -1,15 +1,32 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Button, Col, Container, Image, Row} from "react-bootstrap";
 import {useParams} from "react-router";
-import {fetchOneRecord} from "../http/RecordApi";
+import {adToB, fetchOneRecord} from "../http/RecordApi";
+import { Context} from "../index";
+
+
+
 
 const RecordPage = () => {
     const [record, setRecord] = useState({info: []})
+    const {user}=useContext(Context)
     const {id} = useParams()
 
+
     useEffect(() => {
-        fetchOneRecord(id).then(data => setRecord(data))
+        fetchOneRecord(id).then(data => {setRecord(data)
+            console.log(data)})
+
     }, [])
+    console.log(user)
+
+    const click =  (record) => {
+
+    console.log(adToB(record.id))
+
+
+
+    }
 
     return (
         <Container className="mt-5">
@@ -39,7 +56,7 @@ const RecordPage = () => {
                     </div>
 
 
-                    <Button size="lb" className="mt-5" variant="outline-dark">Добавить в корзину</Button>
+                    <Button size="lb" className="mt-5" onClick={() => click(record)} variant="outline-dark">Добавить в корзину</Button>
 
 
                 </Col>

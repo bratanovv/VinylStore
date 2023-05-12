@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar";
 import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 import {check} from "./http/UserApi";
-import {Spinner} from "react-bootstrap";
+import {Image, Spinner} from "react-bootstrap";
 
 const App = observer(() => {
 
@@ -30,6 +30,7 @@ const App = observer(() => {
     return (
         <BrowserRouter>
             <NavBar></NavBar>
+            <Image  width={1500} height={100} src={process.env.REACT_APP_API_URL + "walls.jpg"}/>
             <AppRouter></AppRouter>
 
         </BrowserRouter>

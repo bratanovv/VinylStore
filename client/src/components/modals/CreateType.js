@@ -28,7 +28,7 @@ const CreateType = ({show, onHide}) => {
             <Modal.Body>
                 <Form>
                     <Form.Control value={value} onChange={e => setValue(e.target.value)}
-                                  placeholder={"Введите название типа"}/>
+                                  placeholder={"Введите название жанра"}/>
                 </Form>
             </Modal.Body>
             <Modal.Footer>

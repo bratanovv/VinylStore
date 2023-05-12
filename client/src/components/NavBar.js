@@ -13,6 +13,7 @@ const NavBar = observer(() => {
         user.setIsAuth(false)
         console.log(user)
     }
+
     const history = useNavigate()
     return (
         <Navbar bg="light" variant="light">

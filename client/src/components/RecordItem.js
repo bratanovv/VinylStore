@@ -5,7 +5,6 @@ import {RECORDS_ROUTE} from "../utils/consts";
 
 const RecordItem = ({record}) => {
     const history = useNavigate()
-    console.log(history)
 
     return (
         <Col md={3} className={"mt-3"} onClick={() => history(RECORDS_ROUTE+'/'+record.id)}>

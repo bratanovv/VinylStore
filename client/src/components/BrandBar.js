@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import {Button, Card, Col, Container, Dropdown, Row} from "react-bootstrap";
+import {Button, Card, CloseButton, Col, Container, Dropdown, Row} from "react-bootstrap";
 
 const BrandBar = observer(() => {
     const {record} = useContext(Context)
@@ -18,7 +18,7 @@ const BrandBar = observer(() => {
 
                     <Dropdown.Menu>
                         {record.brands.map(brand =>
-                            <Dropdown.Item onClick={() => record.setSelectedBrand(brand)} key={brand.id} className="p-3"
+                            <Dropdown.Item onClick={() => record.setSelectedBrand(brand)} key={brand.id} className=""
                                            href="#">
                                 {brand.name}
                             </Dropdown.Item>
@@ -26,23 +26,9 @@ const BrandBar = observer(() => {
 
                     </Dropdown.Menu>
                 </Dropdown></Col>
-                <Col>
-                    <Dropdown className="d-inline mx-2">
-                        <Dropdown.Toggle variant="outline-dark" id="dropdown-autoclose-true">
-                            Издание
-                        </Dropdown.Toggle>
-                    </Dropdown>
-                </Col>
-                <Col>
-                    <Dropdown className="d-inline mx-2">
-                        <Dropdown.Toggle variant="outline-dark" id="dropdown-autoclose-true">
-                            Издание
-                        </Dropdown.Toggle>
-                    </Dropdown>
-                </Col>
-            </Row>
-            <Row  className="pt-3">
-                <Col >{record.selectedBrand ?    <a >{record.selectedBrand.name}</a>  : ''}</Col>
+                <Col >{record.selectedBrand.id ?  <Button onClick={() => record.setSelectedBrand({})} variant={"outline-dark"}>X | {record.selectedBrand.name}</Button>  : ''}</Col>
+
+
             </Row>
 
         </Container>

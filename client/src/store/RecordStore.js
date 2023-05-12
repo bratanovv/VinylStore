@@ -1,17 +1,39 @@
 import {makeAutoObservable} from "mobx";
 
 export default class RecordStore {
+    get totalCount() {
+        return this._totalCount;
+    }
+
+    setTotalCount(value) {
+        this._totalCount = value;
+    }
+
+    get page() {
+        return this._page;
+    }
+
+    setPage(value) {
+        this._page = value;
+    }
+
+    get limit() {
+        return this._limit;
+    }
+
+    setLimit(value) {
+        this._limit = value;
+    }
 
     constructor() {
         this._types = []
-        this._brands = [
-
-        ]
-        this._records = [
-
-        ]
+        this._brands = []
+        this._records = []
         this._selectedType = {}
         this._selectedBrand = {}
+        this._totalCount =0
+        this._page = 1
+        this._limit = 3
         makeAutoObservable(this)
     }
 
@@ -41,6 +63,7 @@ export default class RecordStore {
     }
 
     setSelectedType(type) {
+        this.setPage(1)
         this._selectedType = type
     }
 
